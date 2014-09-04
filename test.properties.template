@@ -1,0 +1,5 @@
+baseURI=http://127.0.0.1:1234
+resultFile=result.xml
+warmup=1
+requests=5
+iterations=2
