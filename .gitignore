@@ -23,3 +23,5 @@ Servers/
 .project
 *~
 *.properties
+.settings/
+m2

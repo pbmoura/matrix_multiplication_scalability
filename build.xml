@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project multiply_matrix_test">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="./jar/MultithreadedTest.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="tests.MultithreadTest"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="./target/classes"/>
+            <zipfileset excludes="META-INF/*.SF" src="m2/repository/eu/choreos/vv/scalability_explorer/1.0-SNAPSHOT/scalability_explorer-1.0-SNAPSHOT.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="m2/repository/jfree/jfreechart/1.0.13/jfreechart-1.0.13.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="m2/repository/jfree/jcommon/1.0.16/jcommon-1.0.16.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="m2/repository/junit/junit/4.8.2/junit-4.8.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="m2/repository/eu/choreos/vv/multiply_matrix/1.0-SNAPSHOT/multiply_matrix-1.0-SNAPSHOT.jar"/>
+        </jar>
+    </target>
+</project>
