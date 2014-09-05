@@ -27,7 +27,7 @@ public class MultithreadTest extends Experiment<Object, Object> {
 	private static String baseURI;
 	private MultiplyMatrixService client;
 	
-	private static final int SIZE = 512;
+	private static int SIZE;
 	private List<DoubleArray> a;
 	private List<DoubleArray> b;
 	
@@ -81,6 +81,7 @@ public class MultithreadTest extends Experiment<Object, Object> {
 		props.load(new FileReader("test.properties"));
 		
 		
+		SIZE = Integer.parseInt(props.getProperty("size"));
 		baseURI = props.getProperty("baseURI");//args[0];
 		fileName = props.getProperty("resultFile");
 		warmup = Integer.parseInt(props.getProperty("warmup"));

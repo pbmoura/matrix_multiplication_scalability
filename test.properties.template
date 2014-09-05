@@ -3,3 +3,4 @@ resultFile=result.xml
 warmup=1
 requests=5
 iterations=2
+size=512
