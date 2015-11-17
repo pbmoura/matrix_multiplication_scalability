@@ -25,7 +25,7 @@ import eu.choreos.vv.loadgenerator.SequentialLoadGenerator;
 import eu.choreos.vv.loadgenerator.strategy.NullStrategy;
 
 
-public class MultithreadTest extends Experiment<Object, Object> {
+public class MultithreadLoadTest extends Experiment<Object, Object> {
 	
 	private static String baseURI;
 	private MultiplyMatrixService client;
@@ -37,16 +37,21 @@ public class MultithreadTest extends Experiment<Object, Object> {
 	@Override
 	public void beforeExperiment() throws Exception {
 //		Thread.sleep(500);
+		MultithreadLocal deployer = new MultithreadLocal();
+		deployer.deploy();
 		MultiplyMatrixServiceService mms = new MultiplyMatrixServiceService(new URL(baseURI + "/MultiplyMatrixService?wsdl"), new QName("multiply.matrix", "MultiplyMatrixServiceService"));
         client = mms.getPort(new QName("multiply.matrix", "MultiplyMatrixServicePort"), MultiplyMatrixService.class);
 		
-        a = generate(SIZE);
-        b = generate(SIZE);
 	}
 	
 	@Override
 	public void beforeIteration() {
 		System.out.println("Starting new iteration");
+		
+		SIZE = (Integer)this.getParam("size");
+		
+		a = generate(SIZE);
+		b = generate(SIZE);
 	}
 	
 	
@@ -91,13 +96,11 @@ public class MultithreadTest extends Experiment<Object, Object> {
 		requests = Integer.parseInt(props.getProperty("requests"));
 		steps = Integer.parseInt(props.getProperty("iterations"));
 		
-		MultithreadTest test = new MultithreadTest();
-//		test.setDeployer(new MultithreadRemote(baseURI));
-		test.setDeployer(new MultithreadLocal());
+		MultithreadLoadTest test = new MultithreadLoadTest();
 		
-		ExperimentStrategy scaling = new ParameterScaling("workers");
+		ExperimentStrategy scaling = new ParameterScaling("size");
 		scaling.setFunction(new ExponentialIncrease(2));
-		scaling.setParameterInitialValue(1);
+		scaling.setParameterInitialValue(SIZE);
 		test.setStrategy(scaling);
 		
 		LoadGeneratorFactory.getInstance().setStrategy(new NullStrategy());

@@ -16,18 +16,18 @@ public class MultithreadLocal extends AbstractDeployer {
 
 	@Override
 	public void deploy() throws Exception {
-		endpoint = deployWorker(1099, 1);
-		MultiplyMatrixServiceService mms = new MultiplyMatrixServiceService(new URL("http://127.0.0.1:1099/MultiplyMatrixService?wsdl"), new QName("multiply.matrix", "MultiplyMatrixServiceService"));
+		endpoint = deployWorker(1234, 1);
+		MultiplyMatrixServiceService mms = new MultiplyMatrixServiceService(new URL("http://127.0.0.1:1234/MultiplyMatrixService?wsdl"), new QName("multiply.matrix", "MultiplyMatrixServiceService"));
 		client = mms.getPort(new QName("multiply.matrix", "MultiplyMatrixServicePort"), MultiplyMatrixService.class);
 	}
 
 	@Override
 	public void scale(Map<String, Object> params) throws Exception {
-//		endpoint.stop();
+		endpoint.stop();
 		int size = (Integer)params.get("workers");
-//		endpoint = deployWorker(1099, size);
+		endpoint = deployWorker(1234, size);
 		
-		client.setPoolSize(size);
+//		client.setPoolSize(size);
 	}
 
 }
